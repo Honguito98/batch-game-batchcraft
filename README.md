@@ -2,7 +2,7 @@ BatchCraft
 
 A minecraft-like clone done in batch scripting.
 
-![image](https://github.com/user-attachments/assets/fb0275e7-52b4-4e39-8087-92b10fd50bf4)
+![image](https://github.com/user-attachments/assets/d062a6a9-c829-475c-b020-179596b6d2a2)
 
 
 View it in Youtube: https://www.youtube.com/watch?v=PzjhL7-8naA
