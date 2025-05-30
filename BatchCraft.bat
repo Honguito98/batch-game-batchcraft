@@ -1,43 +1,31 @@
 @echo off
+:    BatchCraft By Honguito98 
+:    Copyright (C) 2013-2025  Honguito98, and contributors.
+:
+:    This program is free software: you can redistribute it and/or modify
+:    it under the terms of the GNU General Public License as published by
+:    the Free Software Foundation, either version 3 of the License, or
+:    (at your option) any later version.
+:
+:    This program is distributed in the hope that it will be useful,
+:    but WITHOUT ANY WARRANTY; without even the implied warranty of
+:    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+:    GNU General Public License for more details.
+:
+:    You should have received a copy of the GNU General Public License
+:    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 	setlocal enabledelayedexpansion enableextensions
-	set "cmd.con=HKCU\Console\%%SystemRoot%%_system32_cmd.exe /v"
-	set  gpu=core\MineColor.dll
+	cd /d "%~dp0"
+	
+	set gpu=core\MineColor.dll
 	set "ram=!tmp!\WRAM.tmp"
-	del "%tmp%\_$xy.bat">nul 2>&1
+	del "!tmp!\_$xy.bat">nul 2>&1
 	md Worlds >nul 2>&1
-	if [%1]==[ok] goto:init
-	Reg export HKCU\Console Backup.reg>nul
-	Reg delete HKCU\Console\%%SystemRoot%%_system32_cmd.exe /f>nul
-for %%a in (
-	"FaceName /t REG_SZ /d "Terminal" /f"
-	"FontFamily /t REG_DWORD /d 48 /f"
-	"FontSize /t REG_DWORD /d 1024294 /f"
-	"FontWeight /t REG_DWORD /d 700 /f"
-	"ScreenBufferSize /t REG_DWORD /d 13107280 /f"
-	"CursorSize /t REG_DWORD /d 0 /f"
-) do (
-	set "param=%%a"
-	set "param=!param:~1!"
-	set "param=%cmd.con% !param:~0,-1!"
-	Reg Add !param! >nul
-)
-	start /high cmd /q /k "%~0" ok
-for %%a in (
-	"FaceName /f"
-	"FontFamily /f"
-	"FontSize /f"
-	"FontWeight /f"
-	"CursorSize /f"
-) do (
-	set "param=%%a"
-	set "param=!param:~1!"
-	set "param=%cmd.con% !param:~0,-1!"
-	Reg Delete !param! >nul
-)
-	Reg import Backup.reg>nul
-	Del /Q "screen.size">nul
-	Del /Q "Backup.reg">nul
-	exit
+	
+	Core\bg.dll font 8
+	
+	
 :Init
 cls
 	(
@@ -45,7 +33,7 @@ cls
 	echo Objshell.sendkeys "{Bs}"
 	)>"!tmp!\sp.vbs"
 mode con cols=64 lines=21
-Title BatchCraft - Version 1.3 beta - By Honguito98^^!
+Title BatchCraft - Version 1.4 beta - By Honguito98^^!
 for %%a in (
 "ÛÛÛÛÛ   ÛÛÛÛ  ÛÛÛÛÛ ÛÛÛÛ Û  .Û ÛÛÛÛÛ ÛÛÛÛÛ   ÛÛÛÛ  ÛÛÛÛÛ ÛÛÛÛÛ "
 "Û  . Û Û. . Û . Û.  Û .  Û . Û Û. .  Û..  Û Û. . Û Û    .  Û. ."
@@ -53,10 +41,10 @@ for %%a in (
 "Û ÛÛÛ  ÛÛÛÛÛÛ  .Û.  Û .  ÛÛÛÛÛ Û. .  Û ÛÛÛ  ÛÛÛÛÛÛ Û . . . Û.. "
 "Û..  Û Û .  Û.. Û   Û  . Û.  Û Û . . Û. .Û  Û .. Û Û. . .  Û  ."
 "ÛÛÛÛÛ  Û.  .Û . Û  .ÛÛÛÛ Û . Û ÛÛÛÛÛ Û .  Û Û. . Û Û .   . Û.  "
-"    .   .    .     __________________________  .  . . . . . .. "
-" .      .    .  . ÝMineCraft in Batch EditionÝ .  . .   .   .  "
-" .  .  .  .    .  `--------------------------'  . . . .   . . ."
-"  .  .    .  .  .   .   Ver 1.3 beta . . .   . .  .    .   .  ."
+"    .   .    .     _________________________  .   . . . . . .. "
+" .      .    .  . Ý      Batch Edition      Ý  .  . .   .   .  "
+" .  .  .  .    .  `-------------------------'   . . . .   . . ."
+"  .  .    .  .  .   .    Ver 1.4 beta .  .   . .  .    .   .  ."
 "  .    .    .   .   .    .   .   .    .   .    .   .   .  .   ."
 " . .  .  .  .  .   .  . ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿. .   .  .   .   .   . ."
 " . .  .    .   .  .  .  ³ Start Game  ³ . .   .  .   .   . .  ."
@@ -66,7 +54,7 @@ for %%a in (
 " .  .   .   .    .    . ³   °°°°°°° Ý ³ .   .   .   .  . .   . "
 " .  .   .   .    .    . ³   °°°°°°° Ý ³  .   .   .   .  . .   ."
 " .    . .    .    .     ³   °°°°°°°/  ³ .   .   .   .  . .   . "
-"                        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÙ          Honguito98^^^!¸") do echo.%%~a
+"                        ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÙ          Honguito98^^^!.") do echo.%%~a
 !gpu! mouse >nul
 :phase2
 set file=
@@ -74,17 +62,17 @@ cls
 echo.ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄ¿
 echo.³        .::{New World}::.        ³Start^^!³ Exit  ³Delete ³
 echo.ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÙ	
-call:list
+call :list
 :select_w
 	title BatchCraft [World Selected: '!file!' ] %x%,%y% !sel.wld!
 	for /f "tokens=1,2,3" %%a in ('!gpu! mouse') do set/a x=%%b,y=%%c
-	call:list
+	call :list
 	call "!tmp!\_$xy.bat" !x! !y! 2>nul
-	if !y! geq 1 if !y! leq 3 if !x! geq 2 if !x! leq 34 goto:new
-	if !y! geq 1 if !y! leq 3 if !x! geq 36 if !x! leq 41 goto:start
+	if !y! geq 1 if !y! leq 3 if !x! geq 2 if !x! leq 34 goto :new
+	if !y! geq 1 if !y! leq 3 if !x! geq 36 if !x! leq 41 goto :start
 	if !y! geq 1 if !y! leq 3 if !x! geq 43 if !x! leq 49 exit
-	if !y! geq 1 if !y! leq 3 if !x! geq 51 if !x! leq 57 goto:del
-	goto:select_w
+	if !y! geq 1 if !y! leq 3 if !x! geq 51 if !x! leq 57 goto :del
+	goto :select_w
 
 :List
 	!gpu! 0 0 1,4
@@ -94,21 +82,25 @@ call:list
 echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp%\_$xy.bat"
 	echo.[ ] %%a)
 	set/a fi+=1,comax+=1)
-	goto:eof
+	goto :eof
 :del
 	set todel=
 	if not defined file (
-	!gpu! 12 4 13,10 "[Select a World Please]"
-	ping -n 2 localhost>nul&goto:phase2
-)
+		!gpu! 12 4 13,10 "[Select a World Please]"
+		ping -n 2 localhost>nul
+		goto :phase2
+	)
 	!gpu! 12 0 13,10 "[Are You Sure?]"
 	!gpu! 12 0 13,11 "[Yes/No]:      "
 	!gpu! 10 0 22,11
 	start wscript.exe "%tmp%\sp.vbs"&set/p todel=
-	if not defined todel goto:del
-	if /i [!todel!]==[Yes] del "worlds\!file!" >nul&goto:phase2
-	if /i [!todel!]==[No] goto:phase2
-	goto:del
+	if not defined todel goto :del
+	if /i [!todel!]==[Yes] (
+		del "worlds\!file!" >nul
+		goto :phase2
+	)
+	if /i [!todel!]==[No] goto :phase2
+	goto :del
 :new
 	cls
 	set file=
@@ -117,8 +109,8 @@ echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp
 	!gpu! 10 0 10,8 "->"
 	start wscript.exe "!tmp!\sp.vbs" 
 	set/p file=
-	if not defined file    goto:new
-	if exist "core\!file!" goto:new
+	if not defined file    goto :new
+	if exist "core\!file!" goto :new
 	set "file=!file!.bc"
 	cls
 	!gpu! 10 0 8,4 "Creating !file!. This may take several seconds..."
@@ -153,9 +145,10 @@ echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp
 )>>"Worlds\!file!"
 :start
 	if not defined file (
-	!gpu! 12 4 13,10 "[Select a World Please]"
-	ping -n 2 localhost>nul&goto:phase2
-)
+		!gpu! 12 4 13,10 "[Select a World Please]"
+		ping -n 2 localhost>nul
+		goto :phase2
+	)
 	cls
 	mode con cols=48 lines=33
 	set clr1=
@@ -173,8 +166,8 @@ echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp
 	set clean=
 	for /l %%# in (1,1,30) do set "clean=!clean!."
 	set coord=
-	set "item=&call:toRAM %%c%% %%s%% %%tip%%&call:GetItem"
-	set "put=&call:Getplaced"
+	set "item=&call :toRAM %%c%% %%s%% %%tip%%&call :GetItem"
+	set "put=&call :Getplaced"
 	set "box.1=19,28 12 7 $176 "Brick Block""
 	set "box.2=21,28 10 2 $178 "Grass Block""
 	set "box.3=23,28 15 7 $178 "Quartz Block""
@@ -199,8 +192,8 @@ echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp
 	!gpu! 12 4 1,27 "[ ]Break Block"
 	!gpu! 11 3 1,28 "[ ]Save World "
 	!gpu! 13 5 1,29 "[ ]Main Menu  "
-	call:getItem
-	!gpu! /f "worlds\!file!" || goto:phase2
+	call :getItem
+	!gpu! /f "worlds\!file!" || goto :phase2
 	copy  /y "worlds\!file!" !ram! >nul
 :main
 	title BatchCraft: [Playing World:'!file!'] !x!,!y!
@@ -233,21 +226,21 @@ echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp
 	if !x!==23 set first=box.3%item%
 	if !x!==25 set first=box.4%item%
 	if !x!==27 set first=box.5%item%
-	if !x!==29 goto:objects
+	if !x!==29 goto :objects
 	!gpu! 12 4 2,27 " "
 )
-	if !y!==27 if !x!==02 goto:break
-	if !y!==28 if !x!==02 goto:save
-	if !y!==29 if !x!==02 goto:return
-	goto:main
+	if !y!==27 if !x!==02 goto :break
+	if !y!==28 if !x!==02 goto :save
+	if !y!==29 if !x!==02 goto :returnMenu
+	goto :main
 :getItem
-	if [!first!]==[na] call:toram !c! !s! !tip! &set first=box.1
+	if [!first!]==[na] call :toram !c! !s! !tip! &set first=box.1
 	chcp 850 >nul
 	for /l %%# in (1,1,5) do (
 	for /f "tokens=1,2,3,4,*" %%a in ('echo.!box.%%#!') do (
 	if !first!==box.%%# (
 	!gpu! 07 0 18,30 " O O O O O"
-	call:getcord %%a
+	call :getcord %%a
 	!gpu! 09 0 !xx!,30 O
 	set c=%%b&set s=%%c&set tip=%%d
 	!gpu! 00 0 18,31 !clean!
@@ -257,12 +250,12 @@ echo.if [%%1]==[2] if [%%2]==[!fi!] %%Gpu%% 10 0 2,!fi! O^&set "file=%%a">>"%tmp
 	!gpu! %%b %%c %%a %%d
 ))
 	chcp !cp.1! >nul
-	goto:eof
+	goto :eof
 :getcord
 	for /f "Tokens=1,2" %%a in ('echo.%*') do set xx=%%a&set yy=%%b
-	goto:eof
+	goto :eof
 :ToRAM
-if not [%tmp_%]==[true] goto:eof
+if not [%tmp_%]==[true] goto :eof
 (
 	echo.%1
 	echo.%2
@@ -272,10 +265,10 @@ if not [%tmp_%]==[true] goto:eof
 )>>!ram!
 	set tmp_=false
 	set coord=
-	goto:eof
+	goto :eof
 :objects
 	!gpu! 12 4 2,27 " "
-	call:toRAM %c% %s% %tip%
+	call :toRAM %c% %s% %tip%
 	set count.block=1
 	set count=2
 	!gpu! 06 4 5,2       "ÚÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄÂÄ¿"
@@ -311,8 +304,8 @@ if not [%tmp_%]==[true] goto:eof
 	!gpu! /f "%tmp%\clr.dat"
 	!gpu! /f !ram!
 	set first=box.1
-	call:getItem
-	goto:main
+	call :getItem
+	goto :main
 )
 	if !y!==3 (
 	if !x!==6  set "desc=12 7 $176 "Brick Block"" %put%
@@ -354,33 +347,34 @@ if not [%tmp_%]==[true] goto:eof
 	if !x!==18 set "desc=12 4 $016 "Peak Block (right^)"" %put%
 	if !x!==20 set "desc=12 4 $017 "Peak Block (left^)""  %put%
 )
-	goto:ob_ms
+	goto :ob_ms
 :GetPlaced
 	if !count.block! geq 6 set count.block=1
 	set first=box.!count.block!
 	for /f "tokens=1" %%a in ('echo.!box.%count.block%!') do set "box.coord=%%a"
 	set "box.!count.block!=!box.coord! !desc!"
-	call:GetItem
+	call :GetItem
 	set/a count.block+=1
-	goto:eof
+	goto :eof
 :Break
-	call:ToRAM %c% %s% %tip%
+	call :ToRAM %c% %s% %tip%
 	set first=na
 	!gpu! 07 0 18,30 " O O O O O"
 	!gpu! 09 4 2,27 "O"
-	goto:main
+	goto :main
 :save
-	call:ToRAM !c! !s! !tip!
+	call :ToRAM !c! !s! !tip!
 	copy /y !ram! "worlds\!file!" >nul
 	!gpu! 10 4 1,30 "Saved sucessfully"
 	ping -n 2 localhost>nul
 	!gpu! 00 0 1,30 "Saved sucessfully"
-	goto:main
-:return
-	call:ToRam !c! !s! !tip!
+	goto :main
+
+:returnMenu
+	call :ToRam !c! !s! !tip!
 	copy /y !ram! "worlds\!file!" >nul
 	!gpu! 12 4 16,10 "[World Saved]"
 	ping -n 2 localhost>nul
 	mode con cols=64 lines=21
 	cls
-	goto:init
+	goto :init
